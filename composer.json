@@ -1,10 +1,12 @@
 {
-  "name": "matviib/notifier",
-  "description": "Scheduler service",
+  "name": "matviib/scheduler",
+  "description": "Scheduler service for laravel application",
   "keywords": [
     "Scheduler",
     "laravel",
-    "cron"
+    "cron",
+    "schedule",
+    "tasks"
   ],
   "version": "v1.0.0",
   "license": "MIT",
