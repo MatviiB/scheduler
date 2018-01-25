@@ -6,8 +6,14 @@ MatviiB\Scheduler\SchedulerServiceProvider::class,
 ```
 Publish config:
 ```sh
- php artisan vendor:publish --provider=SchedulerServiceProvider --tag="config"
+ php artisan vendor:publish --provider=SchedulerServiceProvider --tag=config --force
 ```
+or 
+```
+php artisan vendor:publish
+```
+and choose "Provider: MatviiB\Scheduler\SchedulerServiceProvider".
+
 Move your commands from App\Console\Kernel schedule function and use ScheduleKernel instead
 ```php
 <?php
