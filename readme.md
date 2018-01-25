@@ -109,3 +109,4 @@ You see scheduled tasks list configured with Scheduler.
 +-----------------+------------------------------+-----------+-------------+-----+----------+
 ```
 You can manage your scheduled task on page /scheduler by default. But you also free to configure it yourself.
+![screnn shot](https://lh3.googleusercontent.com/7Wj6Tnc6vtEZTQWL3A3Zphgb8uBy8maYRynv7GCutGsaXcO6ZsID_6OkOdofNW78TlqK8rllRQrLgDkPT_Sg=w1869-h965-rw)
