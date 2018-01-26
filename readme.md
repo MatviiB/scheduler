@@ -109,4 +109,5 @@ You see scheduled tasks list configured with Scheduler.
 +-----------------+------------------------------+-----------+-------------+-----+----------+
 ```
 You can manage your scheduled task on page /scheduler by default. But you also free to configure it yourself.
-![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/6e8dd96b2fda5aa059714f1ebb056ea7d1f42b09/esbNzIlbQemq1glc_fL5nQ.png)
+![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/Screenshot.png)
+![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/Screenshot%20(1).png)
