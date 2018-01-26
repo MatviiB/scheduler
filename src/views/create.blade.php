@@ -87,7 +87,7 @@
                             <button class="button is-link">Submit</button>
                         </div>
                         <div class="control">
-                            <button class="button is-text">Cancel</button>
+                            <a href="{{ route(config('scheduler.url') . ".index") }}" class="button is-text">Cancel</a>
                         </div>
                     </div>
                     </form>

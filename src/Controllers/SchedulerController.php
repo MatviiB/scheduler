@@ -79,7 +79,7 @@ class SchedulerController
      */
     public function store(Request $request)
     {
-        if (!$request->filled('command')) {
+        if (!$request->filled('command') or !$request->filled('description')) {
             return redirect()->route(config('scheduler.url') . '.index');
         }
 
