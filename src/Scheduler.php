@@ -3,9 +3,12 @@
 namespace MatviiB\Scheduler;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Scheduler extends Model
 {
+    use SoftDeletes;
+
     /**
      * Define database table for service
      *

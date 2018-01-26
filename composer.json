@@ -1,6 +1,6 @@
 {
   "name": "matviib/scheduler",
-  "description": "Scheduler service for laravel application",
+  "description": "Service for scheduling and managing cron tasks in laravel application",
   "keywords": [
     "Scheduler",
     "laravel",
@@ -9,7 +9,7 @@
     "tasks"
   ],
   "type": "library",
-  "version": "v0.0.5",
+  "version": "v0.1.0",
   "license": "MIT",
   "authors": [
     {

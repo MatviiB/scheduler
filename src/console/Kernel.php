@@ -4,6 +4,8 @@ namespace MatviiB\Scheduler\Console;
 
 use Schema;
 
+use App\Console\CronTasksList;
+
 use Carbon\Carbon;
 use MatviiB\Scheduler\Scheduler;
 
@@ -34,7 +36,7 @@ class Kernel
      */
     private function standard(Schedule $schedule)
     {
-        // tasks list
+        new CronTasksList($schedule);
     }
 
     /**

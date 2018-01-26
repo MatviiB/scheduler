@@ -4,17 +4,16 @@ Add Provider for Laravel < 5.5
 ```
 MatviiB\Scheduler\SchedulerServiceProvider::class,
 ```
-Publish config:
-```sh
- php artisan vendor:publish --provider=SchedulerServiceProvider --tag=config --force
-```
-or 
+Publish config and CronTasksList class files:
 ```
 php artisan vendor:publish
 ```
-and choose "Provider: MatviiB\Scheduler\SchedulerServiceProvider".
+and choose "Provider: MatviiB\Scheduler\SchedulerServiceProvider" if requested.
 
-Move your commands from App\Console\Kernel schedule function and use ScheduleKernel instead
+Move your commands from App\Console\Kernel schedule function to new CronTasksList file with path app/Console/CronTasksList.php.
+
+Add next line to schedule function instead of list of commands:
+
 ```php
 <?php
  
@@ -47,27 +46,22 @@ class Kernel extends ConsoleKernel
         //make changes just here
         with(new SchedulerKernel())->schedule($schedule);
     }
- 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
-    protected function commands()
-    {
-        $this->load(__DIR__.'/Commands');
+```
+Paste your commands to app/Console/CronTasksList.php class:
+```php
+<?php
 
-        require base_path('routes/console.php');
+namespace App\Console;
+
+use Illuminate\Console\Scheduling\Schedule;
+
+class CronTasksList
+{
+    public function __construct(Schedule $schedule)
+    {
+        $schedule->command('example:command')->yearly()->withoutOverlapping();
     }
 }
-```
-Paste your commands to MatviiB\Scheduler\Console\Kernel class
-```php
-private function standard(Schedule $schedule)
-    {
-        // your commands list here
-        $schedule->command('your:command')->hourly()->withoutOverlapping();
-    }
 ```
 Create database table:
 ```sh
@@ -91,19 +85,19 @@ You see standard tasks list.
 ```
 To use Scheduler you need to copy commands to schedulers table.
  
-Note: every scheduler:create execution will truncate and create fresh commands data 
+Note: every scheduler:create execution will soft delete old tasks and create fresh commands data.
 ```
 php artisan scheduler:create
 ```
-To use Scheduler you need enable it by adding to your .env 
+To use Scheduler you need enable it by adding to your .env next line:
  ```sh
 SCHEDULER_ENABLED=true
 ```
-Lets check status and scheduled tasks
+Lets check status and scheduled tasks:
 ```
 php artisan scheduler:show
 ```
-And you will see something like this
+And you will see something like this:
 ```
 Scheduler is enabled.
 You see scheduled tasks list configured with Scheduler.

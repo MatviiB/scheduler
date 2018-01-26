@@ -19,6 +19,7 @@
                 Status: Disabled
             @endif
         </p>
+        <a href="{{ route(config('scheduler.url') . '.create') }}" class="button is-primary">Create new</a>
     </div>
 </section>
 @if(env('SCHEDULER_ENABLED'))
@@ -46,14 +47,21 @@
                 <td>{{ $task->last_execution }}</td>
                 <td>{{ $task->next_execution }}</td>
                 <td>
+                    <div class="buttons has-addons is-right">
                     <a class="button is-primary is-small" onclick="run({{ $task->id }})">Run</a>
                     @if($task->is_active)
                         <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
-                           class="button is-danger is-small">Disable</a>
+                           class="button is-warning is-small">Disable</a>
                     @else
                         <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
                            class="button is-success is-small">Enable</a>
                     @endif
+                        <form action="{{ route(config('scheduler.url') . '.delete') }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="task" value="{{ $task->id }}">
+                            <button type="submit" class="button is-danger is-small">X</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach

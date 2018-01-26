@@ -54,7 +54,9 @@ class Create extends Command
             exit;
         }
 
-        \DB::table(config('scheduler.table'))->truncate();
+        Scheduler::get()->each(function ($task) {
+            $task->delete();
+        });
 
         $commands = $this->standard();
 
