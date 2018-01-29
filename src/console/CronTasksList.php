@@ -4,9 +4,17 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 
-/*class CronTasksList
+/**
+ * Trait CronTasksList
+ *
+ * To use: uncomment all lines and copy your commands list
+ * from app/Console/Kernel.php schedule() to tasks() function.
+ *
+ * @package App\Console
+ */
+/*trait CronTasksList
 {
-    public function __construct(Schedule $schedule)
+    public function tasks(Schedule $schedule)
     {
         // your tasks list
     }

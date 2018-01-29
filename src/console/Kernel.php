@@ -13,6 +13,8 @@ use Illuminate\Console\Scheduling\Schedule;
 
 class Kernel
 {
+    use CronTasksList;
+
     /**
      * Define the application's command schedule with Scheduler service
      *
@@ -36,7 +38,7 @@ class Kernel
      */
     private function standard(Schedule $schedule)
     {
-        new CronTasksList($schedule);
+        $this->tasks($schedule);
     }
 
     /**

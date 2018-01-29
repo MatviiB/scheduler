@@ -10,7 +10,7 @@ php artisan vendor:publish
 ```
 and choose "Provider: MatviiB\Scheduler\SchedulerServiceProvider" if requested.
 
-Move your commands from App\Console\Kernel schedule function to new CronTasksList file with path app/Console/CronTasksList.php.
+Move your commands from App\Console\Kernel schedule function to new CronTasksList.php trait file with path app/Console/CronTasksList.php.
 
 Add next line to schedule function instead of list of commands:
 
@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
         with(new SchedulerKernel())->schedule($schedule);
     }
 ```
-Paste your commands to app/Console/CronTasksList.php class:
+Paste your commands to app/Console/CronTasksList.php trait:
 ```php
 <?php
 
@@ -55,9 +55,17 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 
-class CronTasksList
+/**
+ * Trait CronTasksList
+ *
+ * To use: uncomment all lines and copy your commands list
+ * from app/Console/Kernel.php schedule() to tasks() function.
+ *
+ * @package App\Console
+ */
+trait CronTasksList
 {
-    public function __construct(Schedule $schedule)
+    public function tasks(Schedule $schedule)
     {
         $schedule->command('example:command')->yearly()->withoutOverlapping();
     }
