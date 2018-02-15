@@ -159,3 +159,7 @@ This is how the creating task page looks like:
 
 Next screenshot shows how it works:
 ![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/dDiOSy3hSxKAOASqiFxFIA.png)
+
+## License
+
+Scheduler for Laravel is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
