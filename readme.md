@@ -140,5 +140,5 @@ On the next screenshot you can see the same scheduled task for generate report w
 This is how the creating task page looks like:
 ![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/CzMUlry8Qcq3pr8WvZ-Opw.png)
 
-2. Next powerfull thing - You can run your tasks from UI imediately with different arguments and options. Next screenshot will show how it works:
+2. Next powerfull thing - You can run your tasks from UI imediately with different arguments and options. Next screenshot shows how it works:
 ![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/dDiOSy3hSxKAOASqiFxFIA.png)
