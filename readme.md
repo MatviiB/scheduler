@@ -1,5 +1,6 @@
-### Installation
+# Installation
 
+## First steps
 Add Provider for Laravel < 5.5
 ```
 MatviiB\Scheduler\SchedulerServiceProvider::class,
@@ -10,7 +11,13 @@ php artisan vendor:publish
 ```
 and choose "Provider: MatviiB\Scheduler\SchedulerServiceProvider" if requested.
 
-Move your commands from App\Console\Kernel schedule function to new CronTasksList.php trait file with path app/Console/CronTasksList.php.
+Files that must be published:
+```
+config/scheduler.php
+app/Console/CronTasksList.php
+```
+## Next
+#### Move your commands from App\Console\Kernel schedule() function to new file: CronTasksList.php trait.
 
 Add next line to schedule function instead of list of commands:
 
@@ -32,7 +39,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // your commands list
+        ..
+        ..
     ];
  
     /**
@@ -43,7 +51,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //make changes just here
+        // make changes just here
+        // cut your commands from here
+        // and write next line
         with(new SchedulerKernel())->schedule($schedule);
     }
 ```
@@ -67,6 +77,7 @@ trait CronTasksList
 {
     public function tasks(Schedule $schedule)
     {
+        // paste your commands here
         $schedule->command('example:command')->yearly()->withoutOverlapping();
     }
 }
@@ -116,6 +127,18 @@ You see scheduled tasks list configured with Scheduler.
 | example:command | Command description          | 1         | * * * * * * | 1   | 1 minute |
 +-----------------+------------------------------+-----------+-------------+-----+----------+
 ```
-You can manage your scheduled task on page /scheduler by default. But you also free to configure it yourself.
-![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/Screenshot.png)
-![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/Screenshot%20(1).png)
+## Usage
+You can manage your scheduled task on page /scheduler by default.
+
+Also you are free to configure it yourself in config/scheduler.php.
+
+After creating operation you will have your scheduled tasks list and it will ready to work but with scheduler you have some more powerfull things.
+
+1. You can create different tasks for same command with different parameters and run it separately.
+On the next screenshot you can see the same scheduled task for generate report with argument user equal 1 and option --client=2 for first task and argument user equal 3 and option --client=4 for next one.
+![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/y3Sxuz5dTEWmZS4pLsBuIQ.png)
+This is how the creating task page looks like:
+![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/CzMUlry8Qcq3pr8WvZ-Opw.png)
+
+2. Next powerfull thing - You can run your tasks from UI imediately with different arguments and options. Next screenshot will show how it works:
+![laravel scheduler](https://gitlab.com/MatviiB/assets/raw/master/dDiOSy3hSxKAOASqiFxFIA.png)
