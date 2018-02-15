@@ -140,7 +140,7 @@ You see scheduled tasks list configured with Scheduler.
 | example:command | Command description          | 1         | * * * * * * | 1   | 1 minute |
 +-----------------+------------------------------+-----------+-------------+-----+----------+
 ```
-## Usage
+# Usage
 You can manage your scheduled task on page `/scheduler` by default.
 
 Also you are free to configure it yourself in `config/scheduler.php`.
