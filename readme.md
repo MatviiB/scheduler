@@ -17,9 +17,9 @@ config/scheduler.php
 app/Console/CronTasksList.php
 ```
 ## Next
-#### Move your commands from App\Console\Kernel schedule() function to new file: CronTasksList.php trait.
+#### Move your commands from `App\Console\Kernel` schedule() function to new file: `CronTasksList.php` trait.
 
-Add next line to schedule function instead of list of commands:
+Add next line to schedule() function instead of list of commands:
 
 ```php
 <?php
@@ -57,7 +57,7 @@ class Kernel extends ConsoleKernel
         with(new SchedulerKernel())->schedule($schedule);
     }
 ```
-Paste your commands to app/Console/CronTasksList.php trait:
+Paste your commands to `app/Console/CronTasksList.php` trait:
 ```php
 <?php
 
@@ -104,11 +104,11 @@ You see standard tasks list.
 ```
 To use Scheduler you need to copy commands to schedulers table.
  
-Note: every scheduler:create execution will soft delete old tasks and create fresh commands data.
+Note: every `scheduler:create` execution will soft delete old tasks and create fresh commands data.
 ```
 php artisan scheduler:create
 ```
-To use Scheduler you need enable it by adding to your .env next line:
+To use Scheduler you need enable it by adding to your `.env` next line:
  ```sh
 SCHEDULER_ENABLED=true
 ```
@@ -128,9 +128,9 @@ You see scheduled tasks list configured with Scheduler.
 +-----------------+------------------------------+-----------+-------------+-----+----------+
 ```
 ## Usage
-You can manage your scheduled task on page /scheduler by default.
+You can manage your scheduled task on page `/scheduler` by default.
 
-Also you are free to configure it yourself in config/scheduler.php.
+Also you are free to configure it yourself in `config/scheduler.php`.
 
 After creating operation you will have your scheduled tasks list and it will ready to work but with scheduler you have some more powerfull things.
 
