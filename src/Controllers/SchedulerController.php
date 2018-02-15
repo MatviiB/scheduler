@@ -7,10 +7,12 @@ use Carbon\Carbon;
 use MatviiB\Scheduler\Monitor;
 use MatviiB\Scheduler\Scheduler;
 
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-class SchedulerController
+class SchedulerController extends Controller
 {
     use Monitor;
 
@@ -50,15 +52,18 @@ class SchedulerController
      * Run requested task manually
      *
      * @param $task
+     * @param $request
      * @return void
      */
-    public function run($task)
+    public function run($task, Request $request)
     {
         $task = Scheduler::find($task);
         $task->last_execution = Carbon::now();
         $task->save();
 
-        Artisan::call($task->command);
+        $params = ($task->default_params) ? $task->default_params : $request->all();
+
+        Artisan::call($task->command, $params);
     }
 
     /**
@@ -79,16 +84,53 @@ class SchedulerController
      */
     public function store(Request $request)
     {
-        if (!$request->filled('command') or !$request->filled('description')) {
+        if (!$request->filled('command')) {
             return redirect()->route(config('scheduler.url') . '.index');
         }
 
         $task = new Scheduler();
         $task->command = $request->input('command');
-        $task->description = $request->input('description');
+        $task->default_parameters = $request->input('default_parameters');
+        $task->arguments = $request->input('arguments');
+        $task->options = $request->input('options');
+        $task->description = $request->input('description') ?? $request->input('command');
         $task->expression = $request->input('expression');
         $task->is_active = ($request->has('is_active')) ? true : false;
         $task->without_overlapping = ($request->has('without_overlapping')) ? true : false;
+        $task->save();
+
+        return redirect()->route(config('scheduler.url') . '.index');
+    }
+
+    /**
+     * Edit task
+     *
+     * @param $task
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($task)
+    {
+        return view('scheduler::edit', ['task' => Scheduler::find($task)]);
+    }
+
+    /**
+     * Update task
+     *
+     * @param $task
+     * @param Request $request
+     * @return mixed
+     */
+    public function update($task, Request $request)
+    {
+        $task = Scheduler::find($task);
+        $task->command = $request->input('command');
+        $task->default_parameters = $request->input('default_parameters');
+        $task->arguments = $request->input('arguments');
+        $task->options = $request->input('options');
+        $task->description = $request->input('description') ?? $request->input('command');
+        $task->expression = $request->input('expression');
+        $task->is_active = $request->input('is_active') ? true : false;
+        $task->without_overlapping = $request->input('without_overlapping') ? true : false;
         $task->save();
 
         return redirect()->route(config('scheduler.url') . '.index');

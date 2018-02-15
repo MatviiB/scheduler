@@ -3,10 +3,9 @@
 namespace MatviiB\Scheduler\Console;
 
 use Schema;
+use Carbon\Carbon;
 
 use App\Console\CronTasksList;
-
-use Carbon\Carbon;
 use MatviiB\Scheduler\Scheduler;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -53,7 +52,7 @@ class Kernel
 
         foreach ($tasks as $task) {
             if ($task->without_overlapping) {
-                $schedule->command($task->command)
+                $schedule->command($task->command, $task->default_params)
                     ->cron($task->expression)
                     ->withoutOverlapping()
                     ->before(function () use ($task) {
@@ -61,7 +60,7 @@ class Kernel
                         $task->save();
                     });
             } else {
-                $schedule->command($task->command)
+                $schedule->command($task->command, $task->default_params)
                     ->cron($task->expression)
                     ->before(function () use ($task) {
                         $task->last_execution = Carbon::now();

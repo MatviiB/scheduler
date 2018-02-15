@@ -16,6 +16,9 @@ class CreateTableScheduler extends Migration
         Schema::create(config('scheduler.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('command', 128);
+            $table->string('default_parameters', 128)->nullable();
+            $table->string('arguments', 128)->nullable();
+            $table->string('options', 128)->nullable();
             $table->tinyInteger('is_active');
             $table->string('expression', 32);
             $table->string('description', 512);

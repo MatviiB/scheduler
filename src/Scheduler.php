@@ -21,8 +21,8 @@ class Scheduler extends Model
      *
      * @var array
      */
-    protected $fillable = ['command', 'is_active',  'expression',
-        'description', 'last_execution', 'without_overlapping'];
+    protected $fillable = ['command', 'default_parameters', 'arguments', 'options',
+        'is_active',  'expression', 'description', 'last_execution', 'without_overlapping'];
 
     /**
      * Scheduler constructor.
@@ -32,5 +32,26 @@ class Scheduler extends Model
         parent::__construct();
 
         $this->table = config('scheduler.table');
+    }
+
+    /**
+     * Get default parameters for command execution
+     *
+     * @return array
+     */
+    public function getDefaultParamsAttribute()
+    {
+        $params = [];
+
+        if ($this->default_parameters) {
+            $pairs = explode(' ', $this->default_parameters);
+
+            foreach ($pairs as $pair) {
+                $pair = explode('=', $pair);
+                $params[$pair[0]] = $pair[1];
+            }
+        }
+
+        return $params;
     }
 }
