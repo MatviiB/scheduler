@@ -1,4 +1,3 @@
-<a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/v/stable"></a>
 <img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/build.png?b=master" alt="build passed">
 <a href="https://styleci.io/repos/118903237"><img src="https://styleci.io/repos/118903237/shield?branch=master" alt="StyleCI"></a>
 <a href="https://scrutinizer-ci.com/g/MatviiB/scheduler" title="Code Quality"><img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/quality-score.png?b=master">
