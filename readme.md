@@ -1,5 +1,8 @@
-<a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/v/stable"></a>
+<a href="https://scrutinizer-ci.com/g/MatviiB/scheduler"><img scr="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/build.png?b=master"></a>
+<a href="https://styleci.io/repos/118903237"><img src="https://styleci.io/repos/118903237/shield?branch=master" alt="StyleCI"></a>
 <a href="https://scrutinizer-ci.com/g/MatviiB/scheduler" title="Code Quality"><img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/quality-score.png?b=master">
+<a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/license.svg" alt="License"></a>
 
 # Installation
