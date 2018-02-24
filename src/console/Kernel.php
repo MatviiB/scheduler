@@ -55,14 +55,14 @@ class Kernel
                 $schedule->command($task->command, $task->default_params)
                     ->cron($task->expression)
                     ->withoutOverlapping()
-                    ->before(function () use ($task) {
+                    ->before(function() use ($task) {
                         $task->last_execution = Carbon::now();
                         $task->save();
                     });
             } else {
                 $schedule->command($task->command, $task->default_params)
                     ->cron($task->expression)
-                    ->before(function () use ($task) {
+                    ->before(function() use ($task) {
                         $task->last_execution = Carbon::now();
                         $task->save();
                     });

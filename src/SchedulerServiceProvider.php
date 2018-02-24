@@ -24,13 +24,13 @@ class SchedulerServiceProvider extends ServiceProvider
                 __DIR__ . '/console/CronTasksList.php' => app_path('Console/CronTasksList.php')
             ]);
 
-            $this->loadMigrationsFrom(__DIR__.'/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/migrations');
         }
 
 
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/views', 'scheduler');
+        $this->loadViewsFrom(__DIR__ . '/views', 'scheduler');
     }
 
     /**
