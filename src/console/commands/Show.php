@@ -2,11 +2,9 @@
 
 namespace MatviiB\Scheduler\Console\Commands;
 
-use Schema;
-
-use MatviiB\Scheduler\Monitor;
-
 use Illuminate\Console\Command;
+use MatviiB\Scheduler\Monitor;
+use Schema;
 
 class Show extends Command
 {

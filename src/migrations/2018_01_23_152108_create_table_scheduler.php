@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTableScheduler extends Migration
 {
@@ -13,7 +13,7 @@ class CreateTableScheduler extends Migration
      */
     public function up()
     {
-        Schema::create(config('scheduler.table'), function(Blueprint $table) {
+        Schema::create(config('scheduler.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('command', 128);
             $table->string('default_parameters', 128)->nullable();

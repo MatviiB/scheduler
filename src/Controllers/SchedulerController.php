@@ -2,22 +2,19 @@
 
 namespace MatviiB\Scheduler\Controllers;
 
-use Carbon\Carbon;
-
-use MatviiB\Scheduler\Monitor;
-use MatviiB\Scheduler\Scheduler;
-
 use App\Http\Controllers\Controller;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use MatviiB\Scheduler\Monitor;
+use MatviiB\Scheduler\Scheduler;
 
 class SchedulerController extends Controller
 {
     use Monitor;
 
     /**
-     * Service index page
+     * Service index page.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -34,9 +31,10 @@ class SchedulerController extends Controller
     }
 
     /**
-     * Toggle status for task
+     * Toggle status for task.
      *
      * @param $task
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function toggle($task)
@@ -45,14 +43,15 @@ class SchedulerController extends Controller
         $task->is_active = !$task->is_active;
         $task->save();
 
-        return redirect()->route(config('scheduler.url') . '.index');
+        return redirect()->route(config('scheduler.url').'.index');
     }
 
     /**
-     * Run requested task manually
+     * Run requested task manually.
      *
      * @param $task
      * @param $request
+     *
      * @return void
      */
     public function run($task, Request $request)
@@ -67,7 +66,7 @@ class SchedulerController extends Controller
     }
 
     /**
-     * Create a new task
+     * Create a new task.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -77,15 +76,16 @@ class SchedulerController extends Controller
     }
 
     /**
-     * Store new task
+     * Store new task.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         if (!$request->filled('command')) {
-            return redirect()->route(config('scheduler.url') . '.index');
+            return redirect()->route(config('scheduler.url').'.index');
         }
 
         $task = new Scheduler();
@@ -99,13 +99,14 @@ class SchedulerController extends Controller
         $task->without_overlapping = ($request->has('without_overlapping')) ? true : false;
         $task->save();
 
-        return redirect()->route(config('scheduler.url') . '.index');
+        return redirect()->route(config('scheduler.url').'.index');
     }
 
     /**
-     * Edit task
+     * Edit task.
      *
      * @param $task
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($task)
@@ -114,10 +115,11 @@ class SchedulerController extends Controller
     }
 
     /**
-     * Update task
+     * Update task.
      *
      * @param $task
      * @param Request $request
+     *
      * @return mixed
      */
     public function update($task, Request $request)
@@ -133,19 +135,20 @@ class SchedulerController extends Controller
         $task->without_overlapping = $request->input('without_overlapping') ? true : false;
         $task->save();
 
-        return redirect()->route(config('scheduler.url') . '.index');
+        return redirect()->route(config('scheduler.url').'.index');
     }
 
     /**
-     * Delete task (soft delete)
+     * Delete task (soft delete).
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request)
     {
         Scheduler::find($request->input('task'))->delete();
 
-        return redirect()->route(config('scheduler.url') . '.index');
+        return redirect()->route(config('scheduler.url').'.index');
     }
 }
