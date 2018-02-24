@@ -2,11 +2,10 @@
 
 namespace MatviiB\Scheduler\Console\Commands;
 
-use MatviiB\Scheduler\Monitor;
-use MatviiB\Scheduler\Scheduler;
-
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
+use MatviiB\Scheduler\Monitor;
+use MatviiB\Scheduler\Scheduler;
 
 class Create extends Command
 {
@@ -54,7 +53,7 @@ class Create extends Command
             exit;
         }
 
-        Scheduler::get()->each(function($task) {
+        Scheduler::get()->each(function ($task) {
             $task->delete();
         });
 

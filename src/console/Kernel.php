@@ -2,22 +2,21 @@
 
 namespace MatviiB\Scheduler\Console;
 
-use Schema;
-use Carbon\Carbon;
-
 use App\Console\CronTasksList;
-use MatviiB\Scheduler\Scheduler;
-
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
+use MatviiB\Scheduler\Scheduler;
+use Schema;
 
 class Kernel
 {
     use CronTasksList;
 
     /**
-     * Define the application's command schedule with Scheduler service
+     * Define the application's command schedule with Scheduler service.
      *
-     * @param \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
      * @return void
      */
     public function schedule(Schedule $schedule)
@@ -30,9 +29,10 @@ class Kernel
     }
 
     /**
-     * Standard command schedule. used when service is disabled
+     * Standard command schedule. used when service is disabled.
      *
      * @param Schedule $schedule
+     *
      * @return void
      */
     private function standard(Schedule $schedule)
@@ -41,9 +41,10 @@ class Kernel
     }
 
     /**
-     * Schedule command with service. Used when service is enabled
+     * Schedule command with service. Used when service is enabled.
      *
      * @param Schedule $schedule
+     *
      * @return void
      */
     private function database(Schedule $schedule)
@@ -55,14 +56,14 @@ class Kernel
                 $schedule->command($task->command, $task->default_params)
                     ->cron($task->expression)
                     ->withoutOverlapping()
-                    ->before(function() use ($task) {
+                    ->before(function () use ($task) {
                         $task->last_execution = Carbon::now();
                         $task->save();
                     });
             } else {
                 $schedule->command($task->command, $task->default_params)
                     ->cron($task->expression)
-                    ->before(function() use ($task) {
+                    ->before(function () use ($task) {
                         $task->last_execution = Carbon::now();
                         $task->save();
                     });
