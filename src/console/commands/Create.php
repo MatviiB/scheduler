@@ -54,7 +54,7 @@ class Create extends Command
             exit;
         }
 
-        Scheduler::get()->each(function ($task) {
+        Scheduler::get()->each(function($task) {
             $task->delete();
         });
 

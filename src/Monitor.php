@@ -26,7 +26,7 @@ trait Monitor
         $schedule = app(Schedule::class);
 
         return collect($schedule->events())
-            ->map(function ($event) {
+            ->map(function($event) {
 
                 $command = $this->command($event);
 
@@ -51,7 +51,7 @@ trait Monitor
         $tasks = Scheduler::select('command', 'description', 'is_active',
             'expression', 'without_overlapping as w_o')->get();
 
-        return $tasks->each(function ($task) {
+        return $tasks->each(function($task) {
             $task->interval = $this->interval($task->expression);
             return $task;
         });

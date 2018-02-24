@@ -22,7 +22,7 @@ class Scheduler extends Model
      * @var array
      */
     protected $fillable = ['command', 'default_parameters', 'arguments', 'options',
-        'is_active',  'expression', 'description', 'last_execution', 'without_overlapping'];
+        'is_active', 'expression', 'description', 'last_execution', 'without_overlapping'];
 
     /**
      * Scheduler constructor.
