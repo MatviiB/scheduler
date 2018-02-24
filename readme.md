@@ -1,4 +1,5 @@
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/d/total.svg" alt="Total Downloads"></a>
+<a href="https://scrutinizer-ci.com/g/MatviiB/scheduler" title="Code Quality"><img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/quality-score.png?b=master">
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/license.svg" alt="License"></a>
 
 # Installation
