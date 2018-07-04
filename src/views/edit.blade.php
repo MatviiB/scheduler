@@ -6,7 +6,18 @@
     <title>Scheduler</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 </head>
-<body>
+<body style="margin-top: 50px">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                <a class="button" href="{{ config('scheduler.nav-button.href') }}">
+                    {{ config('scheduler.nav-button.text') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 <form method="POST" action="{{ route(config('scheduler.url') . '.update', $task) }}">
     <section class="section">
         <div class="container">
@@ -38,11 +49,11 @@
             </div>
         </div>
     </section>
-@if(env('SCHEDULER_ENABLED'))
-    <section>
-        <div class="container">
-            <div class="columns">
-                <div class="column">
+    @if(env('SCHEDULER_ENABLED'))
+        <section>
+            <div class="container">
+                <div class="columns">
+                    <div class="column">
 
 
                         <input type=hidden name=_method value=PATCH>
@@ -141,12 +152,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="column"></div>
                 </div>
-                <div class="column"></div>
             </div>
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
 </form>
 </body>
 </html>

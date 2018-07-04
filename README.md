@@ -1,8 +1,10 @@
 <p><img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/build.png?b=master" alt="build passed">
 <a href="https://styleci.io/repos/118903237"><img src="https://styleci.io/repos/118903237/shield?branch=master" alt="StyleCI"></a>
-<a href="https://scrutinizer-ci.com/g/MatviiB/scheduler" title="Code Quality"><img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/quality-score.png?b=master">
+<!-- <a href="https://scrutinizer-ci.com/g/MatviiB/scheduler" title="Code Quality"><img src="https://scrutinizer-ci.com/g/MatviiB/scheduler/badges/quality-score.png?b=master"> -->
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/license.svg" alt="License"></a></p>
+
+## [DEMO](https://matviib.com/scheduler/demo)
 
 # Installation
 
@@ -28,7 +30,8 @@ Create database table:
  php artisan migrate
  ```
 ## Let's finish setup
-#### Move your commands from `App\Console\Kernel` schedule() function to new file: `CronTasksList.php` trait.
+
+###### Move your commands from `App\Console\Kernel` schedule() function to new file: `CronTasksList.php` trait.
 
 Add next line to schedule() function instead of list of commands:
 

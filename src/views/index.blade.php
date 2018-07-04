@@ -6,7 +6,18 @@
     <title>Scheduler</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 </head>
-<body>
+<body style="margin-top: 50px">
+<nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                <a class="button" href="{{ config('scheduler.nav-button.href') }}">
+                    {{ config('scheduler.nav-button.text') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 <section class="section">
     <div class="container">
         <div class="is-pulled-left">
@@ -27,75 +38,75 @@
     <br>
 </section>
 @if(env('SCHEDULER_ENABLED'))
-<section>
-    <div class="container">
-        <table class="table is-striped is-fullwidth">
-        <thead>
-        <tr>
-            <th>Command (parameters)</th>
-            <th>Description</th>
-            <th>Is active</th>
-            <th>Interval</th>
-            <th>Last/Next execution</th>
-            <th><div class="is-pulled-right">Actions</div></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($tasks as $task)
-            <tr>
-                <td>{{ $task->command }} {{ $task->default_parameters }}</td>
-                <td>{{ $task->description }}</td>
-                <td>{{ $task->is_active }}</td>
-                <td>{{ $task->interval }}</td>
-                <td>{{ $task->last_execution ?? '-------' }}<br>{{ $task->next_execution }}</td>
-                <td>
-                    <div class="buttons has-addons is-right">
-                    <a class="button is-small" href="{{ route(config('scheduler.url') . '.edit', $task) }}">Edit</a>
-                    @if($task->default_parameters)
-                        <a class="button is-primary is-small" onclick="send('{{ $task->id }}')">Run</a>
-                    @elseif($task->arguments or $task->options)
-                        <a class="button is-primary is-small" onclick="submit('{{ $task->id }}')">Run</a>
-                    @else
-                        <a class="button is-primary is-small" onclick="send('{{ $task->id }}')">Run</a>
-                    @endif
+    <section>
+        <div class="container">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr>
+                    <th>Command (parameters)</th>
+                    <th>Description</th>
+                    <th>Is active</th>
+                    <th>Interval</th>
+                    <th>Last/Next execution</th>
+                    <th><div class="is-pulled-right">Actions</div></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($tasks as $task)
+                    <tr>
+                        <td>{{ $task->command }} {{ $task->default_parameters }}</td>
+                        <td>{{ $task->description }}</td>
+                        <td>{{ $task->is_active }}</td>
+                        <td>{{ $task->interval }}</td>
+                        <td>{{ $task->last_execution ?? '-------' }}<br>{{ $task->next_execution }}</td>
+                        <td>
+                            <div class="buttons has-addons is-right">
+                                <a class="button is-small" href="{{ route(config('scheduler.url') . '.edit', $task) }}">Edit</a>
+                                @if($task->default_parameters)
+                                    <a class="button is-primary is-small" onclick="send('{{ $task->id }}')">Run</a>
+                                @elseif($task->arguments or $task->options)
+                                    <a class="button is-primary is-small" onclick="submit('{{ $task->id }}')">Run</a>
+                                @else
+                                    <a class="button is-primary is-small" onclick="send('{{ $task->id }}')">Run</a>
+                                @endif
 
-                    @if($task->is_active)
-                        <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
-                           class="button is-warning is-small">Disable</a>
-                    @else
-                        <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
-                           class="button is-success is-small">Enable</a>
-                    @endif
-                        <form action="{{ route(config('scheduler.url') . '.delete') }}" method="POST">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="task" value="{{ $task->id }}">
-                            <button type="submit" class="button is-danger is-small" onclick="if(!confirm('Are you sure?')) {return false}">X</button>
-                        </form>
-                    </div>
+                                @if($task->is_active)
+                                    <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
+                                       class="button is-warning is-small">Disable</a>
+                                @else
+                                    <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
+                                       class="button is-success is-small">Enable</a>
+                                @endif
+                                <form action="{{ route(config('scheduler.url') . '.delete') }}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="task" value="{{ $task->id }}">
+                                    <button type="submit" class="button is-danger is-small" onclick="if(!confirm('Are you sure?')) {return false}">X</button>
+                                </form>
+                            </div>
 
-                    @if(!$task->default_parameters)
-                        <form id="form-{{ $task->id }}">
-                            @if($task->arguments)
-                                @foreach(explode(',', $task->arguments) as $argument)
-                                    <p class="help">Argument: {{ $argument }}</p>
-                                    <input type="text" name="{{ $argument }}" class="input is-small" placeholder="argument value">
-                                @endforeach
+                            @if(!$task->default_parameters)
+                                <form id="form-{{ $task->id }}">
+                                    @if($task->arguments)
+                                        @foreach(explode(',', $task->arguments) as $argument)
+                                            <p class="help">Argument: {{ $argument }}</p>
+                                            <input type="text" name="{{ $argument }}" class="input is-small" placeholder="argument value">
+                                        @endforeach
+                                    @endif
+                                    @if($task->options)
+                                        @foreach(explode(',', $task->options) as $option)
+                                            <p class="help">Option: {{ $option }}</p>
+                                            <input type="text" name="{{ $option }}" class="input is-small" placeholder="option value">
+                                        @endforeach
+                                    @endif
+                                </form>
                             @endif
-                            @if($task->options)
-                                @foreach(explode(',', $task->options) as $option)
-                                    <p class="help">Option: {{ $option }}</p>
-                                    <input type="text" name="{{ $option }}" class="input is-small" placeholder="option value">
-                                @endforeach
-                            @endif
-                        </form>
-                    @endif
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-    </div>
-</section>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </section>
 @endif
 <script>
     var params = '';
