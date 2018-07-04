@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 
-/**
+/*
  * Trait CronTasksList
  *
  * To use: uncomment all lines and copy your commands list

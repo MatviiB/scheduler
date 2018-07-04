@@ -30,6 +30,7 @@ Create database table:
  php artisan migrate
  ```
 ## Let's finish setup
+
 ###### Move your commands from `App\Console\Kernel` schedule() function to new file: `CronTasksList.php` trait.
 
 Add next line to schedule() function instead of list of commands:

@@ -20,13 +20,12 @@ class SchedulerServiceProvider extends ServiceProvider
             ]);
 
             $this->publishes([
-                __DIR__ . '/config/scheduler.php' => config_path('scheduler.php'),
-                __DIR__ . '/console/CronTasksList.php' => app_path('Console/CronTasksList.php')
+                __DIR__.'/config/scheduler.php'      => config_path('scheduler.php'),
+                __DIR__.'/console/CronTasksList.php' => app_path('Console/CronTasksList.php'),
             ]);
 
             $this->loadMigrationsFrom(__DIR__.'/migrations');
         }
-
 
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
@@ -40,6 +39,5 @@ class SchedulerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }
