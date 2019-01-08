@@ -4,8 +4,6 @@
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/matviib/scheduler"><img src="https://poser.pugx.org/matviib/scheduler/license.svg" alt="License"></a></p>
 
-## [DEMO](https://matviib.com/scheduler)
-
 # Installation
 
 ## First steps
