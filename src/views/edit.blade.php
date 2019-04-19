@@ -27,7 +27,7 @@
                         Edit task: {{ $task->command }}
                     </h1>
                     <p class="subtitle">
-                        @if(env('SCHEDULER_ENABLED'))
+                        @if(config('scheduler.enabled'))
                             Status: Enabled
                         @else
                             Status: Disabled
@@ -49,7 +49,7 @@
             </div>
         </div>
     </section>
-    @if(env('SCHEDULER_ENABLED'))
+    @if(config('scheduler.enabled'))
         <section>
             <div class="container">
                 <div class="columns">
