@@ -25,7 +25,7 @@
                 Scheduled Tasks
             </h1>
             <p class="subtitle is-pulled-left">
-                @if(env('SCHEDULER_ENABLED'))
+                @if(config('scheduler.enabled'))
                     Status: Enabled
                 @else
                     Status: Disabled
@@ -37,7 +37,7 @@
     <br>
     <br>
 </section>
-@if(env('SCHEDULER_ENABLED'))
+@if(config('scheduler.enabled'))
     <section>
         <div class="container">
             <table class="table is-striped is-fullwidth">
