@@ -19,13 +19,14 @@
     </div>
 </nav>
 @php($base_route = str_replace('/', '.', config('scheduler.url')))
-<form method="POST" action="{{ route($base_route . '.update', $task) }}">
+<form method="POST"
+      action="{{ !empty($task) ? route($base_route . '.update', $task) : route($base_route . '.store') }}">
     <section class="section">
         <div class="container">
             <div class="columns">
                 <div class="column">
                     <h1 class="title">
-                        Edit task: {{ $task->command }}
+                        {{ !empty($task) ? ('Edit task:' . $task->command) : 'Create new task' }}
                     </h1>
                     <p class="subtitle">
                         @if(config('scheduler.enabled'))
@@ -56,15 +57,17 @@
                 <div class="columns">
                     <div class="column">
 
-
-                        <input type=hidden name=_method value=PATCH>
+                        @if(!empty($task))
+                            <input type=hidden name=_method value=PATCH>
+                        @endif
 
                         <div class="columns">
                             <div class="column">
                                 <div class="field">
                                     <label class="label">Command Name</label>
                                     <div class="control">
-                                        <input class="input" name="command" type="text" placeholder="command:name" value="{{ $task->command }}">
+                                        <input class="input" name="command" type="text" placeholder="command:name"
+                                               value="{{ !empty($task) ? $task->command : '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -72,9 +75,10 @@
                                 <div class="field">
                                     <label class="label">Default parameters</label>
                                     <div class="control">
-                                        <input class="input" name="default_parameters" type="text" value="{{ $task->default_parameters }}">
+                                        <input class="input" name="default_parameters" type="text"
+                                               value="{{ !empty($task) ? $task->default_parameters : '' }}">
                                     </div>
-                                    <p class="help">Example: user=1 --client=1  </p>
+                                    <p class="help">Example: user=1 --client=1 </p>
                                 </div>
                             </div>
                         </div>
@@ -84,8 +88,10 @@
                                 <p>Info</p>
                             </div>
                             <div class="message-body">
-                                <p>Use default parameters for scheduling with Cron OR set up arguments and options to allow manual start with different settings.</p>
-                                <p>If default parameters exists, task will use them only. You can't run this task with other arguments and options.</p>
+                                <p>Use default parameters for scheduling with Cron OR set up arguments and options to
+                                    allow manual start with different settings.</p>
+                                <p>If default parameters exists, task will use them only. You can't run this task with
+                                    other arguments and options.</p>
                                 <p>Create another task with the same command for use with different settings.</p>
                             </div>
                         </article>
@@ -95,7 +101,8 @@
                                 <div class="field">
                                     <label class="label">Arguments</label>
                                     <div class="control">
-                                        <input class="input" name="arguments" type="text" value="{{ $task->arguments }}">
+                                        <input class="input" name="arguments" type="text"
+                                               value="{{ !empty($task) ? $task->arguments : '' }}">
                                     </div>
                                     <p class="help">Comma separate arguments names</p>
                                 </div>
@@ -104,7 +111,8 @@
                                 <div class="field">
                                     <label class="label">Options</label>
                                     <div class="control">
-                                        <input class="input" name="options" type="text" value="{{ $task->options }}">
+                                        <input class="input" name="options" type="text"
+                                               value="{{ !empty($task) ? $task->options : '' }}">
                                     </div>
                                     <p class="help">Comma separate options names</p>
                                 </div>
@@ -116,7 +124,8 @@
                         <div class="field">
                             <label class="label">Description</label>
                             <div class="control">
-                                <input class="input" name="description" type="text" value="{{ $task->description }}">
+                                <textarea rows="3" class="input"
+                                          name="description">{{ !empty($task) ? $task->description : '' }}</textarea>
                             </div>
                         </div>
 
@@ -126,8 +135,10 @@
                                     <label class="label">Expression</label>
                                     <div class="control">
                                         <div class="select">
-                                            <select  name="expression">
-                                                <option value="{{ $task->expression }}">{{ config('scheduler.expressions')[$task->expression] }}</option>
+                                            <select name="expression">
+                                                @if(!empty($task))
+                                                    <option value="{{ $task->expression }}">{{ config('scheduler.expressions')[$task->expression] }}</option>
+                                                @endif
                                                 @foreach(config('scheduler.expressions') as $value => $desc)
                                                     <option value="{{ $value }}">{{  $desc }}</option>
                                                 @endforeach
@@ -140,14 +151,17 @@
                                 <div class="field">
                                     <div class="control">
                                         <label class="checkbox">
-                                            <input type="checkbox" name="is_active" @if($task->is_active) checked @endif>Is active
+                                            <input type="checkbox" name="is_active" {{ !empty($task) ? ( $task->is_active ? 'checked' : '') : '' }}>
+                                            Is active
                                         </label>
                                     </div>
                                 </div>
+
                                 <div class="field">
                                     <div class="control">
                                         <label class="checkbox">
-                                            <input type="checkbox" name="without_overlapping" @if($task->without_overlapping) checked @endif>Without overlapping
+                                            <input type="checkbox" name="without_overlapping" {{ !empty($task) ? ( $task->without_overlapping ? 'checked' : '') : 'checked' }}>
+                                            Without overlapping
                                         </label>
                                     </div>
                                 </div>

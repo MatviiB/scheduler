@@ -72,7 +72,7 @@ class SchedulerController extends Controller
      */
     public function create()
     {
-        return view('scheduler::create');
+        return view('scheduler::create_edit');
     }
 
     /**
@@ -111,7 +111,7 @@ class SchedulerController extends Controller
      */
     public function edit($task)
     {
-        return view('scheduler::edit', ['task' => Scheduler::find($task)]);
+        return view('scheduler::create_edit', ['task' => Scheduler::find($task)]);
     }
 
     /**
