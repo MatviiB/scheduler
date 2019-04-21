@@ -18,6 +18,7 @@
         </div>
     </div>
 </nav>
+@php($base_route = str_replace('/', '.', config('scheduler.url')))
 <section class="section">
     <div class="container">
         <div class="is-pulled-left">
@@ -32,7 +33,7 @@
                 @endif
             </p>
         </div>
-        <a href="{{ route(config('scheduler.url') . '.create') }}" class="button is-primary is-pulled-right">Create new</a>
+        <a href="{{ route($base_route . '.create') }}" class="button is-primary is-pulled-right">Create new</a>
     </div>
     <br>
     <br>
@@ -61,7 +62,7 @@
                         <td>{{ $task->last_execution ?? '-------' }}<br>{{ $task->next_execution }}</td>
                         <td>
                             <div class="buttons has-addons is-right">
-                                <a class="button is-small" href="{{ route(config('scheduler.url') . '.edit', $task) }}">Edit</a>
+                                <a class="button is-small" href="{{ route($base_route . '.edit', $task) }}">Edit</a>
                                 @if($task->default_parameters)
                                     <a class="button is-primary is-small" onclick="send('{{ $task->id }}')">Run</a>
                                 @elseif($task->arguments or $task->options)
@@ -71,13 +72,13 @@
                                 @endif
 
                                 @if($task->is_active)
-                                    <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
+                                    <a href="{{ route($base_route . '.toggle', $task) }}"
                                        class="button is-warning is-small">Disable</a>
                                 @else
-                                    <a href="{{ route(config('scheduler.url') . '.toggle', $task) }}"
+                                    <a href="{{ route($base_route . '.toggle', $task) }}"
                                        class="button is-success is-small">Enable</a>
                                 @endif
-                                <form action="{{ route(config('scheduler.url') . '.delete') }}" method="POST">
+                                <form action="{{ route($base_route . '.delete') }}" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="task" value="{{ $task->id }}">
                                     <button type="submit" class="button is-danger is-small" onclick="if(!confirm('Are you sure?')) {return false}">X</button>

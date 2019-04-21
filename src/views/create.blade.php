@@ -18,7 +18,8 @@
         </div>
     </div>
 </nav>
-<form method="POST" action="{{ route(config('scheduler.url') . '.store') }}">
+@php($base_route = str_replace('/', '.', config('scheduler.url')))
+<form method="POST" action="{{ route($base_route . '.store') }}">
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -37,7 +38,7 @@
                 <div class="column">
                     <div class="field is-grouped is-pulled-right">
                         <div class="control">
-                            <a href="{{ route(config('scheduler.url') . ".index") }}" class="button">Cancel</a>
+                            <a href="{{ route($base_route . ".index") }}" class="button">Cancel</a>
                         </div>
                         <div class="control">
                             <button class="button is-link">Save</button>
