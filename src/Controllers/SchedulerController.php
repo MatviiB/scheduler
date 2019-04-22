@@ -43,7 +43,7 @@ class SchedulerController extends Controller
         $task->is_active = !$task->is_active;
         $task->save();
 
-        return redirect()->route(config('scheduler.url').'.index');
+        return redirect()->route(config('scheduler.name').'.index');
     }
 
     /**
@@ -85,7 +85,7 @@ class SchedulerController extends Controller
     public function store(Request $request)
     {
         if (!$request->filled('command')) {
-            return redirect()->route(config('scheduler.url').'.index');
+            return redirect()->route(config('scheduler.name').'.index');
         }
 
         $task = new Scheduler();
@@ -99,7 +99,7 @@ class SchedulerController extends Controller
         $task->without_overlapping = ($request->has('without_overlapping')) ? true : false;
         $task->save();
 
-        return redirect()->route(config('scheduler.url').'.index');
+        return redirect()->route(config('scheduler.name').'.index');
     }
 
     /**
@@ -135,7 +135,7 @@ class SchedulerController extends Controller
         $task->without_overlapping = $request->input('without_overlapping') ? true : false;
         $task->save();
 
-        return redirect()->route(config('scheduler.url').'.index');
+        return redirect()->route(config('scheduler.name').'.index');
     }
 
     /**
@@ -149,6 +149,6 @@ class SchedulerController extends Controller
     {
         Scheduler::find($request->input('task'))->delete();
 
-        return redirect()->route(config('scheduler.url').'.index');
+        return redirect()->route(config('scheduler.name').'.index');
     }
 }

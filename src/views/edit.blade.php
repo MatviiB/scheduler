@@ -18,7 +18,7 @@
         </div>
     </div>
 </nav>
-<form method="POST" action="{{ route(config('scheduler.url') . '.update', $task) }}">
+<form method="POST" action="{{ route(config('scheduler.name') . '.update', $task) }}">
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -37,7 +37,7 @@
                 <div class="column">
                     <div class="field is-grouped is-pulled-right">
                         <div class="control">
-                            <a href="{{ route(config('scheduler.url') . ".index") }}" class="button">Cancel</a>
+                            <a href="{{ route(config('scheduler.name') . ".index") }}" class="button">Cancel</a>
                         </div>
                         <div class="control">
                             <button class="button is-link">Save</button>

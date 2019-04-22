@@ -1,25 +1,26 @@
 <?php
 
-Route::group([ 'namespace' => 'MatviiB\\Scheduler\\Controllers',
-    'middleware' => config('scheduler.middleware')], function () {
+$name = config('scheduler.name');
 
-    $url = config('scheduler.url');
-    $name = str_replace('/', '.', $url);
-    //
-    Route::get($url, ['as' => "$name.index", 'uses' => "SchedulerController@index"]);
+Route::group([
+    'prefix' => config('scheduler.url'),
+    'namespace' => 'MatviiB\\Scheduler\\Controllers',
+    'middleware' => config('scheduler.middleware')
+], function () use ($name) {
 
-    Route::get("$url/edit/{task}", ['as' => "$name.edit", 'uses' => "SchedulerController@edit"]);
+    Route::get('/', "SchedulerController@index")->name("$name.index");
 
-    Route::patch("$url/update/{task}", ['as' => "$name.update", 'uses' =>  "SchedulerController@update"]);
+    Route::get("/edit/{task}", "SchedulerController@edit")->name("$name.edit");
 
-    Route::get("$url/toggle/{task}", ['as' => "$name.toggle", 'uses' => "SchedulerController@toggle"]);
+    Route::patch("/update/{task}", "SchedulerController@update")->name("$name.update");
 
-    Route::get("$url/run/{task}", ['as' => "$name.run", 'uses' => "SchedulerController@run"]);
+    Route::get("/toggle/{task}", "SchedulerController@toggle")->name("$name.toggle");
 
-    Route::get("$url/create", ['as' => "$name.create", 'uses' => "SchedulerController@create"]);
+    Route::get("/run/{task}", "SchedulerController@run")->name("$name.run");
 
-    Route::post("$url/store", ['as' => "$name.store", 'uses' => "SchedulerController@store"]);
+    Route::get("/create", "SchedulerController@create")->name("$name.create");
 
-    Route::delete("$url/delete", ['as' => "$name.delete", 'uses' => "SchedulerController@delete"]);
+    Route::post("/store", "SchedulerController@store")->name("$name.store");
 
+    Route::delete("/delete", "SchedulerController@delete")->name("$name.delete");
 });
